@@ -1287,6 +1287,7 @@ async function openAlbum(projectIndex) {
     albumPage.scrollTop = 0;
     albumPage.classList.add('open');
     document.body.style.overflow = 'hidden';
+    history.pushState({ album: true }, '');
 }
 
 function closeAlbum() {
@@ -1295,7 +1296,13 @@ function closeAlbum() {
     document.getElementById('albumVideoGrid').innerHTML = '';
 }
 
-document.getElementById('albumBack').addEventListener('click', closeAlbum);
+window.addEventListener('popstate', () => {
+    if (document.getElementById('albumPage').classList.contains('open')) {
+        closeAlbum();
+    }
+});
+
+document.getElementById('albumBack').addEventListener('click', () => history.back());
 
 /* ── LIGHTBOX (inside album) ────────────────────────────── */
 const lightbox = document.getElementById('lightbox');
