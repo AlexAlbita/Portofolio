@@ -91,17 +91,20 @@
         .hero {
             height: 100vh; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center;
-            background: var(--off-white); padding: 0 24px; position: relative;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+                        url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80') center/cover no-repeat;
+            padding: 0 24px; position: relative;
         }
-        .hero-eyebrow { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: var(--mid-gray); margin-bottom: 24px; }
-        .hero-name { font-family: var(--font-serif); font-size: clamp(4rem, 9vw, 9.5rem); font-weight: 400; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 28px; }
-        .hero-name em { font-style: italic; color: var(--mid-gray); }
-        .hero-sub { font-size: 0.95rem; font-weight: 300; letter-spacing: 0.06em; color: var(--mid-gray); margin-bottom: 52px; }
+        .hero-eyebrow { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+        .hero-name { font-family: var(--font-serif); font-size: clamp(4rem, 9vw, 9.5rem); font-weight: 400; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 28px; color: var(--white); }
+        .hero-name em { font-style: italic; color: rgba(255,255,255,0.55); }
+        .hero-sub { font-size: 0.95rem; font-weight: 300; letter-spacing: 0.06em; color: rgba(255,255,255,0.65); margin-bottom: 52px; }
         .cta-link { display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 4px; transition: gap 0.3s var(--ease); }
         .cta-link:hover { gap: 16px; }
+        .hero .cta-link { color: var(--white); border-bottom-color: var(--white); }
         .scroll-indicator { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; animation: scrollBounce 2.2s ease-in-out infinite; }
-        .scroll-indicator span { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mid-gray); }
-        .scroll-line { width: 1px; height: 44px; background: var(--mid-gray); }
+        .scroll-indicator span { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+        .scroll-line { width: 1px; height: 44px; background: rgba(255,255,255,0.45); }
         @keyframes scrollBounce {
             0%, 100% { transform: translateX(-50%) translateY(0); }
             50% { transform: translateX(-50%) translateY(7px); }
@@ -255,6 +258,14 @@
         @media (max-width: 640px) {
             .album-grid { column-count: 1; column-gap: 0; }
         }
+
+        /* ── ALBUM VIDEO ──────────────────────────────────── */
+        .album-video { padding: 0 52px 48px; }
+        .album-video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .album-video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: var(--black); }
+        .album-video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        @media (max-width: 1024px) { .album-video { padding: 0 32px 40px; } }
+        @media (max-width: 640px)  { .album-video { padding: 0 20px 32px; } }
 
         /* ── LIGHTBOX ─────────────────────────────────────── */
         .lightbox {
@@ -449,7 +460,7 @@
     <h2 class="contact-heading reveal">Let's work<br><em>together</em></h2>
     <p class="contact-sub reveal">Available for commissions, collaborations, and long-term projects.</p>
     <!-- EDIT: Your email (both href and display text) -->
-    <a href="mailto:hello@yourname.com" class="contact-email reveal">hello@yourname.com</a>
+    <a href="mailto:alex.albita@yahoo.com" class="contact-email reveal">alex.albita@yahoo.com</a>
     <!-- EDIT: Your social links (add real URLs in href="") -->
     <div class="socials reveal">
         <a href="#" class="social">Instagram</a>
@@ -492,6 +503,15 @@
         </div>
         <!-- Location, Client, Year, Category appear here automatically -->
         <div class="album-meta" id="albumMeta"></div>
+    </div>
+
+    <!-- Video (shown only when the project has a video field) -->
+    <div class="album-video" id="albumVideo" style="display:none;">
+        <div class="album-photos-header">
+            <span class="section-label">Video</span>
+            <div class="section-divider"></div>
+        </div>
+        <div class="album-video-grid" id="albumVideoGrid"></div>
     </div>
 
     <!-- Photo grid for all photos in this album -->
@@ -551,204 +571,271 @@
 
 const projects = [
     {
-        title: "Villa Moderna",
+        title: "Hotel Mercure Bucharest City Center",
+        category: ["hospitality", "architecture"],
+        location: "George Enescu Street, Bucharest",
+        client: "Mercure / Accor",
+        year: "2026",
+        description: "A 4-star city-centre hotel on George Enescu Street, steps from Calea Victoriei and the Romanian Athenaeum — its interior design draws on the legacy of composer George Enescu. Photography covers the hotel's architecture, Winestone Restaurant & Bar, and the garden terrace.",
+        cover: "images/mercure-amzei/DSC_2321-HDR-Edit.jpg",
+        photos: [
+            "images/mercure-amzei/DSC_2117-HDR-Edit-Edit.jpg",
+            "images/mercure-amzei/DSC_2122-HDR-Edit-Edit.jpg",
+            "images/mercure-amzei/DSC_2132-HDR-Edit.jpg",
+            "images/mercure-amzei/DSC_2261-HDR-Edit.jpg",
+            "images/mercure-amzei/DSC_2276-HDR-Edit-Edit.jpg",
+            "images/mercure-amzei/DSC_2281-HDR-Edit-Edit.jpg",
+            "images/mercure-amzei/DSC_2306-HDR-Edit.jpg",
+            "images/mercure-amzei/DSC_2321-HDR-Edit.jpg",
+            "images/mercure-amzei/DSC_2326-HDR-Edit.jpg",
+            "images/mercure-amzei/DSC_2336-HDR-Edit.jpg",
+        ]
+    },
+    {
+        title: "Yacht Kid",
+        category: "architecture",
+        location: "Sector 1, Bucharest",
+        client: "Yacht Kid",
+        year: "2026",
+        description: "A boutique residential complex on Anton Holban Street in northern Bucharest — apartments with private pools, direct access to a 10,000 sqm park, and a ground-floor retail strip including a specialty café. Aerial and ground photography captures the intimate scale of the project and its landscaped surroundings.",
+        cover: "images/yacht-kid/DSC_1541.jpg",
+        photos: [
+            "images/yacht-kid/DJI_20251216141946_0469_D-Edit.jpg",
+            "images/yacht-kid/DJI_20260120162914_0196_D-Edit.jpg",
+            "images/yacht-kid/DJI_20260120163032_0201_D-Edit.jpg",
+            "images/yacht-kid/DJI_20260309170854_0490_D-Edit.jpg",
+            "images/yacht-kid/DJI_20260316165158_0679_D-Edit.jpg",
+            "images/yacht-kid/DJI_20260316165223_0682_D-Edit.jpg",
+            "images/yacht-kid/DSC_1541.jpg",
+            "images/yacht-kid/DSC_1545-Edit-Edit.jpg",
+        ]
+    },
+    {
+        title: "Victoria Homes",
+        category: "architecture",
+        location: "Voluntari, Bucharest",
+        client: "Victoria Homes",
+        year: "2026",
+        description: "A large-scale residential complex on Pipera Boulevard near Băneasa Forest — 20 buildings at P+3E+4R height, 899 apartments across three bedroom typologies, developed by ASCO Construcții. Aerial photography covers the completed first phase and documents the project's generous footprint on the northern edge of Bucharest.",
+        cover: "images/victoria-homes/DJI_20260311142553_0606_D-Edit.jpg",
+        photos: [
+            "images/victoria-homes/DJI_20260121125126_0291_D-Edit.jpg",
+            "images/victoria-homes/DJI_20260311142553_0606_D-Edit.jpg",
+            "images/victoria-homes/DJI_20260311143131_0622_D.jpg",
+            "images/victoria-homes/DJI_20260311143201_0624_D.jpg",
+            "images/victoria-homes/DJI_20260311143317_0627_D.jpg",
+            "images/victoria-homes/DJI_20260311143506_0631_D-Edit.jpg",
+            "images/victoria-homes/DJI_20260311143653_0635_D-2-Edit.jpg",
+            "images/victoria-homes/DJI_20260311143832_0639_D.jpg",
+        ]
+    },
+    {
+        title: "Up Site",
+        category: "architecture",
+        location: "Floreasca, Bucharest",
+        client: "Atenor",
+        year: "2026",
+        description: "A €70M luxury residential development by Belgian developer Atenor — two connected towers of 12 and 25 floors holding 270 apartments in Bucharest's Floreasca neighborhood. The project features seismic base isolation, a rooftop spa, pool, and underground parking. Aerial and ground photography documents the towers at various construction and delivery stages.",
+        cover: "images/up-site/DJI_20251022164833_0026_D.jpg",
+        photos: [
+            "images/up-site/DJI_20251022164833_0026_D.jpg",
+            "images/up-site/DJI_20251022165050_0031_D.jpg",
+            "images/up-site/DJI_20251022165434_0042_D.jpg",
+            "images/up-site/DJI_20251216134847_0443_D-Edit.jpg",
+            "images/up-site/DJI_20251216135201_0453_D-2-Edit.jpg",
+            "images/up-site/DJI_20260114143503_0149_D.jpg",
+            "images/up-site/DJI_20260114143800_0156_D.jpg",
+            "images/up-site/DJI_20260114143834_0158_D.jpg",
+            "images/up-site/DJI_20260114144023_0162_D-Edit.jpg",
+            "images/up-site/DJI_20260309173235_0509_D.jpg",
+            "images/up-site/DJI_20260309173531_0518_D.jpg",
+            "images/up-site/DJI_20260309174534_0542_D.jpg",
+            "images/up-site/DSC_1353-Edit.jpg",
+            "images/up-site/DSC_1357-Edit.jpg",
+        ]
+    },
+    {
+        title: "Quartier Azuga",
+        category: "architecture",
+        location: "Tei, Bucharest",
+        client: "STC Partners",
+        year: "2026",
+        description: "A €20M+ residential development on Azuga Street in Bucharest's Tei neighborhood — 236 apartments across two phases, designed by Deco Architects with a focus on sustainable construction. Aerial photography captures the completed complex and its relationship to the surrounding urban fabric of Sector 2.",
+        cover: "images/quartier-azuga/DJI_20260417140305_0152_D-Edit.jpg",
+        photos: [
+            "images/quartier-azuga/DJI_20260417140305_0152_D-Edit.jpg",
+            "images/quartier-azuga/DJI_20260417140646_0164_D-Edit.jpg",
+            "images/quartier-azuga/DJI_20260417140806_0166_D.jpg",
+            "images/quartier-azuga/DJI_20260417140935_0170_D-Edit.jpg",
+            "images/quartier-azuga/DJI_20260417141056_0175_D-Edit.jpg",
+            "images/quartier-azuga/DJI_20260417141219_0179_D.jpg",
+            "images/quartier-azuga/DJI_20260417141504_0186_D-Edit.jpg",
+            "images/quartier-azuga/DJI_20260417141606_0188_D-Edit.jpg",
+        ]
+    },
+    {
+        title: "Park Line Residence",
         category: "architecture",
         location: "Bucharest",
-        client: "Private Client",
-        year: "2024",
-        description: "A modern residential villa exploring the interplay between concrete, glass, and natural light. Shot over two days at golden hour.",
-        cover: "https://picsum.photos/seed/a1cv/800/1067",
+        client: "Park Line",
+        year: "2026",
+        description: "A mixed-use residential development of nine low-rise buildings and 140 apartments in one of Bucharest's emerging neighborhoods. The project combines varied apartment typologies — studios to four-room units — with ground-floor retail, restaurants, and a concept-store anchor. Aerial and ground photography documents the scale and urban integration of the completed complex.",
+        cover: "images/park-line/DJI_20260326103501_0776_D.jpg",
         photos: [
-            "https://picsum.photos/seed/a1cv/1400/900",
-            "https://picsum.photos/seed/a1p2/1400/900",
-            "https://picsum.photos/seed/a1p3/1400/900",
-            "https://picsum.photos/seed/a1p4/1400/900",
-            "https://picsum.photos/seed/a1p5/1400/900",
-            "https://picsum.photos/seed/a1p6/1400/900",
+            "images/park-line/DJI_20260114125339_0119_D-Edit.jpg",
+            "images/park-line/DJI_20260114125518_0120_D-Edit.jpg",
+            "images/park-line/DJI_20260326102521_0751_D.jpg",
+            "images/park-line/DJI_20260326103017_0765_D.jpg",
+            "images/park-line/DJI_20260326103317_0772_D.jpg",
+            "images/park-line/DJI_20260326103501_0776_D.jpg",
+            "images/park-line/DSC_1526-Edit.jpg",
+            "images/park-line/DSC_1533-Edit.jpg",
+            "images/park-line/DSC_1537-Edit.jpg",
         ]
     },
     {
-        title: "Studio Loft",
+        title: "Nusco Homes",
         category: "architecture",
-        location: "Cluj-Napoca",
-        client: "Design Studio Kappa",
-        year: "2024",
-        description: "An industrial loft transformed into a creative studio. Raw concrete and warm wood create a dynamic work environment.",
-        cover: "https://picsum.photos/seed/a2cv/800/1067",
+        location: "Tunari, Bucharest",
+        client: "Nusco",
+        year: "2026",
+        description: "A €30M villa compound in Tunari, north of Bucharest — 121 villas across six Italian-named typologies set on 50,000 sqm of landscaped grounds. Aerial photography captures the estate's generous scale and the relationship between architecture and the surrounding greenery.",
+        cover: "images/nusco-homes/DJI_20260326093138_0694_D-Edit.jpg",
         photos: [
-            "https://picsum.photos/seed/a2cv/1400/900",
-            "https://picsum.photos/seed/a2p2/1400/900",
-            "https://picsum.photos/seed/a2p3/1400/900",
-            "https://picsum.photos/seed/a2p4/1400/900",
-            "https://picsum.photos/seed/a2p5/1400/900",
+            "images/nusco-homes/DJI_20260326093138_0694_D-Edit.jpg",
+            "images/nusco-homes/DJI_20260326093256_0700_D.jpg",
+            "images/nusco-homes/DJI_20260326093843_0712_D.jpg",
+            "images/nusco-homes/DJI_20260326094219_0723_D.jpg",
+            "images/nusco-homes/DJI_20260326094338_0728_D.jpg",
+            "images/nusco-homes/DJI_20260326094439_0732_D.jpg",
+            "images/nusco-homes/DJI_20260326094614_0739_D.jpg",
         ]
     },
     {
-        title: "Brand Identity — Studio K",
-        category: "design",
-        location: "Bucharest",
-        client: "Studio K",
-        year: "2023",
-        description: "Complete visual identity for an architecture and interior design studio. Logo, typography, stationery, and digital assets.",
-        cover: "https://picsum.photos/seed/d1cv/800/1067",
-        photos: [
-            "https://picsum.photos/seed/d1cv/1400/900",
-            "https://picsum.photos/seed/d1p2/1400/900",
-            "https://picsum.photos/seed/d1p3/1400/900",
-            "https://picsum.photos/seed/d1p4/1400/900",
-        ]
-    },
-    {
-        title: "Minimalist House",
+        title: "Nusco City",
         category: "architecture",
-        location: "Sibiu",
-        client: "Private Client",
-        year: "2023",
-        description: "A minimalist family home where every surface is considered. White walls, natural stone, and curated light.",
-        cover: "https://picsum.photos/seed/a3cv/800/1067",
+        location: "Pipera, Bucharest",
+        client: "Nusco",
+        year: "2026",
+        description: "A €70M Italian-backed masterplan on 23 hectares in the heart of Bucharest's Pipera district — over 4,000 apartments across multiple phases, with 40% of the site dedicated to parks, mini-forests, and green corridors. Photographed from ground and air during active construction and delivery phases.",
+        cover: "images/nusco/DJI_20260311135206_0570_D-Edit.jpg",
         photos: [
-            "https://picsum.photos/seed/a3cv/1400/900",
-            "https://picsum.photos/seed/a3p2/1400/900",
-            "https://picsum.photos/seed/a3p3/1400/900",
-            "https://picsum.photos/seed/a3p4/1400/900",
-            "https://picsum.photos/seed/a3p5/1400/900",
-            "https://picsum.photos/seed/a3p6/1400/900",
-            "https://picsum.photos/seed/a3p7/1400/900",
+            "images/nusco/DJI_20260311135206_0570_D-Edit.jpg",
+            "images/nusco/DJI_20260311135311_0574_D-2-Edit.jpg",
+            "images/nusco/DJI_20260311135515_0582_D-Edit.jpg",
+            "images/nusco/DJI_20260311135852_0591_D-Edit.jpg",
+            "images/nusco/DJI_20260311140112_0600_D-Edit-Edit.jpg",
+            "images/nusco/DJI_20251218123448_0540_D-Edit.jpg",
+            "images/nusco/DJI_20260121142047_0340_D.jpg",
+            "images/nusco/DSC_1425-Edit.jpg",
+            "images/nusco/DSC_1433-Edit.jpg",
+            "images/nusco/DSC_1440-Edit.jpg",
+            "images/nusco/DSC_1447-2-Edit.jpg",
+            "images/nusco/DSC_1451-Edit.jpg",
+            "images/nusco/DSC_1567.jpg",
+            "images/nusco/DSC_1569.jpg",
+            "images/nusco/DSC_1573.jpg",
+            "images/nusco/DSC_1575.jpg",
         ]
     },
     {
-        title: "Poster Series — Vol. 1",
-        category: "design",
-        location: "Bucharest",
-        client: "Self-initiated",
-        year: "2023",
-        description: "A series of six typographic posters exploring the relationship between space, scale, and letterform.",
-        cover: "https://picsum.photos/seed/d2cv/800/1067",
-        photos: [
-            "https://picsum.photos/seed/d2cv/1400/900",
-            "https://picsum.photos/seed/d2p2/1400/900",
-            "https://picsum.photos/seed/d2p3/1400/900",
-            "https://picsum.photos/seed/d2p4/1400/900",
-            "https://picsum.photos/seed/d2p5/1400/900",
-            "https://picsum.photos/seed/d2p6/1400/900",
-        ]
-    },
-    {
-        title: "The White Gallery",
+        title: "BHB Avenue",
         category: "architecture",
-        location: "Timișoara",
-        client: "Gallery Alb",
-        year: "2022",
-        description: "An art gallery where the architecture steps back to let the artwork breathe. Uniform lighting, seamless walls, silent floors.",
-        cover: "https://picsum.photos/seed/a4cv/800/1067",
+        location: "Șos. Fabrica de Glucoză, Bucharest",
+        client: "BHB Properties",
+        year: "2026",
+        description: "A €35M premium residential development in northern Bucharest — 8 blocks, 699 apartments, and a 7-metre concierge lobby anchoring a full suite of amenities including an 18-metre indoor pool and urban garden. Photographed aerially to capture the scale and precision of one of the capital's new benchmarks for upscale living.",
+        cover: "images/bhb/DJI_20260120164618_0229_D-Edit.jpg",
         photos: [
-            "https://picsum.photos/seed/a4cv/1400/900",
-            "https://picsum.photos/seed/a4p2/1400/900",
-            "https://picsum.photos/seed/a4p3/1400/900",
-            "https://picsum.photos/seed/a4p4/1400/900",
-            "https://picsum.photos/seed/a4p5/1400/900",
+            "images/bhb/DJI_20260120164618_0229_D-Edit.jpg",
+            "images/bhb/DJI_20260120164737_0235_D-Edit-Edit.jpg",
+            "images/bhb/DJI_20260120165115_0244_D-Edit-Edit.jpg",
+            "images/bhb/DJI_20260405102810_0054_D.jpg",
+            "images/bhb/DJI_20260405102942_0059_D.jpg",
+            "images/bhb/DJI_20260405103120_0064_D-Edit.jpg",
+            "images/bhb/DJI_20260405103310_0069_D.jpg",
+            "images/bhb/DJI_20260405103518_0075_D.jpg",
+            "images/bhb/DJI_20260405103930_0086_D.jpg",
+            "images/bhb/DJI_20260405104047_0088_D.jpg",
         ]
     },
     {
-        title: "Editorial Layout — Casa",
-        category: "design",
-        client: "Casa Magazine",
-        year: "2022",
-        description: "Full editorial design for a special edition of Casa architecture magazine — 120 pages of layout, type, and imagery.",
-        cover: "https://picsum.photos/seed/d3cv/800/1067",
-        photos: [
-            "https://picsum.photos/seed/d3cv/1400/900",
-            "https://picsum.photos/seed/d3p2/1400/900",
-            "https://picsum.photos/seed/d3p3/1400/900",
-            "https://picsum.photos/seed/d3p4/1400/900",
-        ]
-    },
-    {
-        title: "Glass Pavilion",
+        title: "Avalon Estate",
         category: "architecture",
-        location: "Brașov",
-        client: "Arh. M. Ionescu",
-        year: "2022",
-        description: "A glass-and-steel pavilion that dissolves the boundary between interior and exterior. Shot in all four seasons.",
-        cover: "https://picsum.photos/seed/a5cv/800/1067",
+        location: "Aviației–Pipera, Bucharest",
+        client: "Prime Kapital",
+        year: "2026",
+        description: "An award-winning gated community on 8.1 hectares in northern Bucharest, where over a third of the land is dedicated to green and recreational space. 600 units — townhouses, villas, and apartments — photographed from ground and air to capture the balance between architecture and landscape.",
+        cover: "images/avalon/DSC_1551.jpg",
         photos: [
-            "https://picsum.photos/seed/a5cv/1400/900",
-            "https://picsum.photos/seed/a5p2/1400/900",
-            "https://picsum.photos/seed/a5p3/1400/900",
-            "https://picsum.photos/seed/a5p4/1400/900",
-            "https://picsum.photos/seed/a5p5/1400/900",
-            "https://picsum.photos/seed/a5p6/1400/900",
+            "images/avalon/DJI_20260405095941_0008_D-2-Edit.jpg",
+            "images/avalon/DJI_20260405100146_0016_D-Edit.jpg",
+            "images/avalon/DJI_20260405100450_0023_D-Edit.jpg",
+            "images/avalon/DJI_20260405100535_0026_D.jpg",
+            "images/avalon/DJI_20260405101053_0044_D.jpg",
+            "images/avalon/DJI_20260405101302_0050_D.jpg",
+            "images/avalon/DSC_1549.jpg",
+            "images/avalon/DSC_1551.jpg",
+            "images/avalon/DSC_1554.jpg",
+            "images/avalon/DSC_1555.jpg",
+            "images/avalon/DSC_1558-Edit.jpg",
+            "images/avalon/DSC_1559.jpg",
+            "images/avalon/DSC_1561-Edit.jpg",
+            "images/avalon/DSC_1562-Edit.jpg",
+            "images/avalon/DSC_1566.jpg",
         ]
     },
     {
-        title: "Penthouse Suite",
+        title: "ARQA Jollie Village",
         category: "architecture",
-        location: "Bucharest",
-        client: "Developer Arcadia",
-        year: "2021",
-        description: "A rooftop penthouse with panoramic city views. The photography captures both the grandeur of the space and its intimate details.",
-        cover: "https://picsum.photos/seed/a6cv/800/1067",
+        location: "Erou Iancu Nicolae, Bucharest",
+        client: "ARQA",
+        year: "2026",
+        description: "A premium residential complex of 158 units near Băneasa Forest, developed on 8,000 sqm with underground parking, generous green courtyards, and a heated saltwater pool. Photographed from the air to convey the scale and landscaping of one of Bucharest's most sought-after new addresses.",
+        cover: "images/arqa-jollie-village/DJI_20260114123402_0091_D-Edit.jpg",
         photos: [
-            "https://picsum.photos/seed/a6cv/1400/900",
-            "https://picsum.photos/seed/a6p2/1400/900",
-            "https://picsum.photos/seed/a6p3/1400/900",
-            "https://picsum.photos/seed/a6p4/1400/900",
+            "images/arqa-jollie-village/DJI_20260114123402_0091_D-Edit.jpg",
+            "images/arqa-jollie-village/DJI_20260326105238_0785_D.jpg",
+            "images/arqa-jollie-village/DJI_20260326105438_0787_D.jpg",
+            "images/arqa-jollie-village/DJI_20260326105741_0797_D.jpg",
+            "images/arqa-jollie-village/DJI_20260326105930_0802_D.jpg",
+            "images/arqa-jollie-village/DJI_20260326110038_0806_D.jpg",
         ]
     },
     {
-        title: "Visual Identity — Arc Studio",
-        category: "design",
-        client: "Arc Studio",
-        year: "2021",
-        description: "Minimal brand system for a rising architecture practice. The mark references the section line — the architect's primary tool.",
-        cover: "https://picsum.photos/seed/d4cv/800/1067",
-        photos: [
-            "https://picsum.photos/seed/d4cv/1400/900",
-            "https://picsum.photos/seed/d4p2/1400/900",
-            "https://picsum.photos/seed/d4p3/1400/900",
-            "https://picsum.photos/seed/d4p4/1400/900",
-            "https://picsum.photos/seed/d4p5/1400/900",
-        ]
-    },
-    {
-        title: "The Black House",
+        title: "Prima Vista",
         category: "architecture",
-        location: "Predeal",
-        client: "Private Client",
-        year: "2021",
-        description: "A mountain retreat clad entirely in charred timber. Photographed in winter snow — the black form against white landscape.",
-        cover: "https://picsum.photos/seed/a7cv/800/1067",
+        location: "Șos. Fabrica de Glucoză, Bucharest",
+        client: "Prima Development Group",
+        year: "2026",
+        description: "A contemporary residential complex in northern Bucharest comprising 482 units across ultra-modern blocks with perimeter terraces and two private gardens designed by Beros Abdul. Photographed from ground level and aerial to capture both the architectural detail and the scale of the development.",
+        cover: "images/prima-vista/DJI_20260309165724_0466_D.jpg",
         photos: [
-            "https://picsum.photos/seed/a7cv/1400/900",
-            "https://picsum.photos/seed/a7p2/1400/900",
-            "https://picsum.photos/seed/a7p3/1400/900",
-            "https://picsum.photos/seed/a7p4/1400/900",
-            "https://picsum.photos/seed/a7p5/1400/900",
-            "https://picsum.photos/seed/a7p6/1400/900",
-        ]
-    },
-    {
-        title: "Type in Space",
-        category: "design",
-        client: "Self-initiated",
-        year: "2020",
-        description: "A personal project pairing architectural photography with hand-set typography. Published as a limited-edition zine.",
-        cover: "https://picsum.photos/seed/d5cv/800/1067",
-        photos: [
-            "https://picsum.photos/seed/d5cv/1400/900",
-            "https://picsum.photos/seed/d5p2/1400/900",
-            "https://picsum.photos/seed/d5p3/1400/900",
-            "https://picsum.photos/seed/d5p4/1400/900",
+            "images/prima-vista/DSC_6474-HDR.jpg",
+            "images/prima-vista/DSC_6479-HDR.jpg",
+            "images/prima-vista/DSC_6484-HDR.jpg",
+            "images/prima-vista/DSC_6499-HDR.jpg",
+            "images/prima-vista/DSC_6519-HDR.jpg",
+            "images/prima-vista/DSC_6590-HDR.jpg",
+            "images/prima-vista/DSC_6610-HDR.jpg",
+            "images/prima-vista/DSC_6625-HDR.jpg",
+            "images/prima-vista/DSC_6797.jpg",
+            "images/prima-vista/DJI_20260120165135_0245_D-Edit.jpg",
+            "images/prima-vista/DJI_20260309165724_0466_D.jpg",
+            "images/prima-vista/DJI_20260309170546_0485_D-Edit.jpg",
+            "images/prima-vista/DJI_20260423112248_0314_D-Edit-Edit.jpg",
+            "images/prima-vista/DJI_20260423112712_0323_D-Edit.jpg",
+            "images/prima-vista/DJI_20260423112805_0325_D.jpg",
         ]
     },
     {
         title: "Eko Group Villa",
-        category: "hospitality",
+        category: "architecture",
         location: "Bucharest",
         client: "Eko Group Villa",
         year: "2025",
-        description: "A hospitality-focused villa project blending warm interiors, elegant detailing, and atmospheric lighting across lounge, dining, and guest spaces.",
-        cover: "images/eko-group-villa/AA-EKO-01-2.jpg",
+        description: "A prestigious Bucharest event villa where heritage architecture meets contemporary luxury. Historical interiors — including a fireplace sculpted by Brâncuși's disciples — set the stage for an 800 sqm property that balances grandeur with intimacy.",
+        cover: "images/eko-group-villa/AA-EKO-72.jpg",
         photos: [
             "images/eko-group-villa/AA-EKO-01-2.jpg",
             "images/eko-group-villa/AA-EKO-08-2.jpg",
@@ -769,8 +856,8 @@ const projects = [
         location: "Poiana Brașov",
         client: "Grand Hotel Teleferic",
         year: "2025",
-        description: "A luxury hotel project capturing guest rooms, dining spaces, and mountain-facing hospitality interiors at Grand Hotel Teleferic.",
-        cover: "images/teleferic/DSC_6814-HDR-Edit-Edit.jpg",
+        description: "A four-star mountain retreat at the foot of the ski slopes in Poiana Brașov. Warm wood interiors, panoramic alpine views, and refined dining spaces photographed across seasons — where the mountain outside becomes part of every room.",
+        cover: "images/teleferic/DSC_7361.jpg",
         photos: [
             "images/teleferic/DSC_6814-HDR-Edit-Edit.jpg",
             "images/teleferic/DSC_6859-HDR-Edit.jpg",
@@ -817,10 +904,10 @@ const projects = [
     {
         title: "Antica Pizza",
         category: "hospitality",
-        location: "Piata Amzei, Bucharest",
+        location: "Amzei Square, Bucharest",
         client: "Antica Pizza",
         year: "2025",
-        description: "A contemporary pizza restaurant capturing the warmth of wood-fired ambiance, intimate dining spaces, and authentic culinary atmosphere in the heart of Piata Amzei.",
+        description: "An artisanal Neapolitan pizzeria in the heart of Piața Amzei, where an open wood-fired kitchen and handpicked Italian ingredients deliver an authentic slice of Italy. Intimate, honest, and quietly delicious.",
         cover: "images/antica-pizza/DSC_1613-HDR.jpg",
         photos: [
             "images/antica-pizza/DSC_1613-HDR.jpg",
@@ -839,10 +926,59 @@ const projects = [
             "images/antica-pizza/DSC_1844.jpg",
         ]
     },
+    {
+        title: "Black Coffee Amzei",
+        category: "hospitality",
+        location: "Amzei Square, Bucharest",
+        client: "Black Coffee",
+        year: "2025",
+        description: "A specialty coffee destination in Piața Amzei where carefully sourced single-origin roasts meet artisan pastries and a chic, unhurried atmosphere. Designed to make you linger — and come back.",
+        videos: [
+            "https://www.youtube.com/embed/b_mDdnJlXQ4",
+            "https://www.youtube.com/embed/QD2c_udfIYs",
+            "https://www.youtube.com/embed/Cj6etl7bktE",
+        ],
+        cover: "images/black-coffee/BA-103.jpg",
+        photos: [
+            "images/black-coffee/BA-103.jpg",
+            "images/black-coffee/BA-030.jpg",
+            "images/black-coffee/BA-036.jpg",
+            "images/black-coffee/BA-044.jpg",
+            "images/black-coffee/BA-060.jpg",
+            "images/black-coffee/BA-082.jpg",
+            "images/black-coffee/BA-139.jpg",
+            "images/black-coffee/BA-149.jpg",
+            "images/black-coffee/BA-176.jpg",
+            "images/black-coffee/BA-231.jpg",
+            "images/black-coffee/BA-237.jpg",
+            "images/black-coffee/DSC_2411.jpg",
+            "images/black-coffee/DSC_2432-Edit.jpg",
+            "images/black-coffee/DSC_2471-Edit.jpg",
+        ]
+    },
+    {
+        title: "Red Angus Steakhouse",
+        category: ["architecture", "hospitality"],
+        location: "Amzei Square, Bucharest",
+        client: "Red Angus Steakhouse",
+        year: "2025",
+        description: "A Bucharest landmark since 2010, Red Angus has relocated to Piața Amzei with a bold new energy. Certified Australian and USDA beef, American-inspired décor, and the best live blues in the city — photographed to match its character.",
+        cover: "images/red-angus/DSC_1886-HDR-Edit.jpg",
+        photos: [
+            "images/red-angus/DSC_1886-HDR-Edit.jpg",
+            "images/red-angus/DSC_1896-HDR-Edit-Edit.jpg",
+            "images/red-angus/DSC_1916-HDR-Edit.jpg",
+            "images/red-angus/DSC_1921-HDR-Edit.jpg",
+            "images/red-angus/DSC_1981-HDR-Edit.jpg",
+            "images/red-angus/DSC_1991-HDR-Edit.jpg",
+            "images/red-angus/DSC_2041-HDR-Edit-Edit.jpg",
+            "images/red-angus/DSC_2056-HDR-Edit-Edit.jpg",
+        ]
+    },
 ];
 
 const catLabels = {
-    architecture: "Architecture & Interior",
+    architecture: " Architecture & Interior",
     design: "Graphic Design",
     hospitality: "Hospitality"
 };
@@ -851,15 +987,16 @@ const catLabels = {
 const grid = document.getElementById('portfolioGrid');
 
 projects.forEach((p, i) => {
+    const cats = Array.isArray(p.category) ? p.category : [p.category];
     const el = document.createElement('div');
     el.className = 'p-item reveal';
-    el.dataset.category = p.category;
+    el.dataset.category = cats.join(' ');
     el.dataset.index = i;
     el.innerHTML = `
         <img src="${p.cover}" alt="${p.title}" loading="lazy">
         <div class="p-overlay">
             <div class="p-info">
-                <div class="p-cat">${catLabels[p.category] || p.category}</div>
+                <div class="p-cat">${cats.map(c => catLabels[c] || c).join(' · ')}</div>
                 <div class="p-title">${p.title}</div>
             </div>
         </div>`;
@@ -874,7 +1011,7 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.add('active');
         const f = btn.dataset.filter;
         document.querySelectorAll('.p-item').forEach(item => {
-            item.classList.toggle('hidden', f !== 'all' && item.dataset.category !== f);
+            item.classList.toggle('hidden', f !== 'all' && !item.dataset.category.split(' ').includes(f));
         });
     });
 });
@@ -932,7 +1069,7 @@ async function openAlbum(projectIndex) {
         { label: 'Location', value: p.location },
         { label: 'Client',   value: p.client   },
         { label: 'Year',     value: p.year      },
-        { label: 'Category', value: catLabels[p.category] || p.category },
+        { label: 'Category', value: (Array.isArray(p.category) ? p.category : [p.category]).map(c => catLabels[c] || c).join(' · ') },
     ].filter(f => f.value).forEach(f => {
         const item = document.createElement('div');
         item.className = 'album-meta-item';
@@ -961,6 +1098,21 @@ async function openAlbum(projectIndex) {
         albumGrid.appendChild(el);
     });
 
+    // Videos
+    const videoSection = document.getElementById('albumVideo');
+    const videoGrid    = document.getElementById('albumVideoGrid');
+    const videos = p.videos || (p.video ? [p.video] : []);
+    if (videos.length) {
+        videoGrid.innerHTML = videos.map(src => `
+            <div class="album-video-wrap">
+                <iframe src="${src}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+            </div>`).join('');
+        videoSection.style.display = '';
+    } else {
+        videoGrid.innerHTML = '';
+        videoSection.style.display = 'none';
+    }
+
     // Show the album page (slides up from bottom)
     const albumPage = document.getElementById('albumPage');
     albumPage.scrollTop = 0;
@@ -971,6 +1123,7 @@ async function openAlbum(projectIndex) {
 function closeAlbum() {
     document.getElementById('albumPage').classList.remove('open');
     document.body.style.overflow = '';
+    document.getElementById('albumVideoGrid').innerHTML = '';
 }
 
 document.getElementById('albumBack').addEventListener('click', closeAlbum);
