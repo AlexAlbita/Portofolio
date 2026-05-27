@@ -56,17 +56,20 @@
             backdrop-filter: blur(14px);
             box-shadow: 0 1px 0 var(--light-gray);
         }
-        .nav-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; letter-spacing: 0.02em; }
-        .nav-logo em { font-style: italic; color: var(--mid-gray); }
+        .nav-logo { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; letter-spacing: 0.02em; color: var(--white); transition: color 0.4s var(--ease); }
+        .nav-logo em { font-style: italic; color: rgba(255,255,255,0.55); transition: color 0.4s var(--ease); }
+        .nav.scrolled .nav-logo { color: var(--black); }
+        .nav.scrolled .nav-logo em { color: var(--mid-gray); }
         .nav-links { display: flex; gap: 36px; list-style: none; }
         .nav-links a {
             font-size: 0.72rem; font-weight: 400; letter-spacing: 0.12em;
-            text-transform: uppercase; color: var(--dark-gray);
-            position: relative; transition: color 0.3s;
+            text-transform: uppercase; color: rgba(255,255,255,0.85);
+            position: relative; transition: color 0.4s var(--ease);
         }
+        .nav.scrolled .nav-links a { color: var(--dark-gray); }
         .nav-links a::after {
             content: ''; position: absolute; bottom: -3px; left: 0;
-            width: 0; height: 1px; background: var(--black);
+            width: 0; height: 1px; background: currentColor;
             transition: width 0.3s var(--ease);
         }
         .nav-links a:hover::after { width: 100%; }
@@ -74,7 +77,8 @@
             display: none; flex-direction: column; gap: 5px;
             cursor: pointer; padding: 4px; background: none; border: none;
         }
-        .hamburger span { display: block; width: 24px; height: 1px; background: var(--black); transition: 0.3s var(--ease); }
+        .hamburger span { display: block; width: 24px; height: 1px; background: var(--white); transition: 0.3s var(--ease); }
+        .nav.scrolled .hamburger span { background: var(--black); }
         .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
         .hamburger.open span:nth-child(2) { opacity: 0; }
         .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
@@ -130,8 +134,8 @@
         .p-item:hover .p-overlay { background: rgba(13,13,13,0.58); }
         .p-info { transform: translateY(10px); opacity: 0; transition: all 0.32s ease; }
         .p-item:hover .p-info { transform: translateY(0); opacity: 1; }
-        .p-cat { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 5px; }
-        .p-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 400; color: var(--white); line-height: 1.25; }
+        .p-cat { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 5px; }
+        .p-title { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 700; color: var(--white); line-height: 1.25; }
         .p-item.hidden { display: none; }
 
         /* ── ABOUT ────────────────────────────────────────── */
@@ -152,12 +156,12 @@
         #services .section-label { color: rgba(255,255,255,0.38); }
         #services .section-divider { background: rgba(255,255,255,0.1); }
         #services .section-heading { color: var(--white); }
-        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.1); margin-top: 56px; }
-        .svc { background: var(--black); padding: 44px 32px; transition: background 0.3s; }
+        .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(255,255,255,0.1); margin-top: 56px; }
+        .svc { background: var(--black); padding: 36px 24px; transition: background 0.3s; }
         .svc:hover { background: #181818; }
-        .svc-num { font-family: var(--font-serif); font-size: 3rem; font-weight: 400; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 28px; }
-        .svc-name { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 400; color: var(--white); margin-bottom: 12px; }
-        .svc-desc { font-size: 0.83rem; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.48); }
+        .svc-num { font-family: var(--font-serif); font-size: 2.4rem; font-weight: 400; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 22px; }
+        .svc-name { font-family: var(--font-serif); font-size: 1.08rem; font-weight: 400; color: var(--white); margin-bottom: 10px; }
+        .svc-desc { font-size: 0.78rem; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.48); }
 
         /* ── CONTACT ──────────────────────────────────────── */
         #contact { background: var(--white); text-align: center; padding: 120px 52px; }
@@ -173,8 +177,16 @@
         .social:hover { color: var(--black); }
 
         /* ── FOOTER ───────────────────────────────────────── */
-        footer { padding: 28px 52px; border-top: 1px solid var(--light-gray); display: flex; align-items: center; justify-content: space-between; }
+        footer { padding: 28px 52px; border-top: 1px solid var(--light-gray); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .footer-top { width: 100%; display: flex; align-items: center; justify-content: space-between; }
         .footer-copy { font-size: 0.72rem; color: var(--mid-gray); letter-spacing: 0.05em; }
+        .footer-disclaimer { font-size: 0.67rem; color: var(--mid-gray); letter-spacing: 0.03em; text-align: center; border-top: 1px solid var(--light-gray); padding-top: 10px; width: 100%; }
+        /* ── CLIENTS ── */
+        .clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--light-gray); margin-top: 56px; }
+        .client-logo { background: var(--white); display: flex; align-items: center; justify-content: center; padding: 36px 32px; transition: background 0.25s; }
+        .client-logo:hover { background: var(--off-white); }
+        .client-logo img { max-width: 140px; max-height: 70px; width: 100%; height: auto; object-fit: contain; filter: grayscale(1); opacity: 0.65; transition: opacity 0.25s; }
+        .client-logo:hover img { opacity: 1; }
         .footer-name { font-family: var(--font-serif); font-size: 0.95rem; }
         .footer-name em { font-style: italic; }
 
@@ -295,7 +307,8 @@
             #contact { padding: 100px 32px; }
             footer { padding: 24px 32px; }
             .nav { padding: 0 32px; }
-            .portfolio-grid, .services-grid, .album-grid { grid-template-columns: repeat(2, 1fr); }
+            .portfolio-grid, .album-grid { grid-template-columns: repeat(2, 1fr); }
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
             .about-layout { grid-template-columns: 1fr; gap: 52px; }
             .about-photo { max-width: 480px; }
             .album-topbar { padding: 0 32px; }
@@ -331,6 +344,7 @@
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
+        <li><a href="#clients">Clients</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
     <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -343,6 +357,7 @@
         <li><a href="#portfolio" class="mob-link">Portfolio</a></li>
         <li><a href="#about" class="mob-link">About</a></li>
         <li><a href="#services" class="mob-link">Services</a></li>
+        <li><a href="#clients" class="mob-link">Clients</a></li>
         <li><a href="#contact" class="mob-link">Contact</a></li>
     </ul>
 </div>
@@ -393,13 +408,13 @@
         <div class="about-copy reveal">
             <!-- EDIT: Your stats -->
             <div class="about-stats">
-                <div class="stat"><span class="stat-n">150+</span><span class="stat-l">Projects</span></div>
-                <div class="stat"><span class="stat-n">8</span><span class="stat-l">Years</span></div>
-                <div class="stat"><span class="stat-n">30+</span><span class="stat-l">Clients</span></div>
+                <div class="stat"><span class="stat-n">40+</span><span class="stat-l">Projects</span></div>
+                <div class="stat"><span class="stat-n">2</span><span class="stat-l">Years</span></div>
+                <div class="stat"><span class="stat-n">10+</span><span class="stat-l">Clients</span></div>
             </div>
             <!-- EDIT: Your bio -->
-            <p>I'm a photographer and visual designer specializing in architecture, interiors, and graphic design. Based in [City], I work with architects, interior designers, studios, and brands to create imagery that communicates their vision.</p>
-            <p>Every project starts with understanding the space, the light, and the story behind it — resulting in visuals that are both technically sharp and emotionally resonant.</p>
+            <p>I'm a photographer and visual designer based in Bucharest, Romania, specializing in architecture, real estate, hospitality, and graphic design. I work with developers, architects, restaurants, and hotels to create imagery that communicates their vision and drives results.</p>
+            <p>Every project starts with understanding the space, the light, and the story behind it, whether it's an aerial view of a new residential complex, the atmosphere of a restaurant at golden hour, or a dish photographed to make you reach for the menu. The result is always visuals that are technically sharp and emotionally resonant.</p>
             <a href="#contact" class="cta-link">
                 Get in touch
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -409,7 +424,7 @@
         </div>
         <div class="about-photo reveal">
             <!-- EDIT: Replace with your portrait — e.g. src="images/portrait.jpg" -->
-            <img src="https://picsum.photos/seed/portrait99/600/800" alt="Portrait">
+            <img src="images/up-site/DJI_20251022165434_0042_D.jpg" alt="Portrait">
             <!-- EDIT: Caption text -->
             <div class="about-photo-note">Available for commissions</div>
         </div>
@@ -428,29 +443,47 @@
         <div class="svc">
             <div class="svc-num">01</div>
             <h3 class="svc-name">Architectural Photography</h3>
-            <p class="svc-desc">Interior and exterior photography for architects, developers, and real estate. Natural and artificial light, wide-angle to detail shots.</p>
+            <p class="svc-desc">Exterior, interior, and detail photography for architects and developers. Every angle of a building, from structure to finish.</p>
         </div>
         <div class="svc">
             <div class="svc-num">02</div>
-            <h3 class="svc-name">Interior Photography</h3>
-            <p class="svc-desc">Capturing the atmosphere and detail of residential and commercial interiors. Ideal for interior designers, hotels, and publications.</p>
+            <h3 class="svc-name">Real Estate Photography</h3>
+            <p class="svc-desc">Capturing residential and commercial spaces to support sales and marketing. Wide-angle interiors, HDR blends, and lifestyle staging.</p>
         </div>
         <div class="svc">
             <div class="svc-num">03</div>
+            <h3 class="svc-name">Food Photography</h3>
+            <p class="svc-desc">Menu, editorial, and social media photography for restaurants and hospitality brands. Light-driven compositions that make food irresistible.</p>
+        </div>
+        <div class="svc">
+            <div class="svc-num">04</div>
             <h3 class="svc-name">Graphic Design</h3>
             <p class="svc-desc">Visual identity, print design, and editorial layout. Clean, concept-driven design that supports your brand's visual language.</p>
         </div>
     </div>
 </section>
 
-<!-- ── HOSPITALITY ───────────────────────────────────────── -->
-<section class="section" id="hospitality">
+<!-- ── CLIENTS ───────────────────────────────────────────── -->
+<section class="section" id="clients">
     <div class="section-header reveal">
-        <span class="section-label">Hospitality</span>
+        <span class="section-label">Trusted By</span>
         <div class="section-divider"></div>
     </div>
-    <h2 class="section-heading reveal">Hotels, Restaurants, Resorts</h2>
-    <p class="about-copy reveal">Specializing in hospitality photography and design, I capture the mood, detail, and experience of spaces where people dine, stay, and celebrate. From boutique hotels to luxury restaurants, my visuals help hospitality brands tell their story with warmth and atmosphere.</p>
+    <h2 class="section-heading reveal">Clients</h2>
+    <div class="clients-grid reveal">
+        <div class="client-logo"><img src="images/clients-logos/197930371.jpg.webp" alt="Client"></div>
+        <div class="client-logo"><img src="images/clients-logos/Mercure_Hotels_Logo_2013.svg.png" alt="Mercure Hotels"></div>
+        <div class="client-logo"><img src="images/clients-logos/Vector.png" alt="Client" style="filter: grayscale(1) invert(1);"></div>
+        <div class="client-logo"><img src="images/clients-logos/ekogroup-vila.ro-1.jpg" alt="Eko Group"></div>
+        <div class="client-logo"><img src="images/clients-logos/images.jpeg" alt="Client"></div>
+        <div class="client-logo"><img src="images/clients-logos/logo-3.png" alt="Client"></div>
+        <div class="client-logo"><img src="images/clients-logos/logo.png.webp" alt="Client"></div>
+        <div class="client-logo"><img src="images/clients-logos/sc8vk3eg.png" alt="Client"></div>
+        <div class="client-logo"><img src="images/clients-logos/tryingtodoart_MOBIL-01.svg" alt="Trying to Do Art"></div>
+        <div class="client-logo"><img src="images/clients-logos/break.png" alt="Break"></div>
+        <div class="client-logo"></div>
+        <div class="client-logo"></div>
+    </div>
 </section>
 
 <!-- ── CONTACT ────────────────────────────────────────────── -->
@@ -463,17 +496,19 @@
     <a href="mailto:alex.albita@yahoo.com" class="contact-email reveal">alex.albita@yahoo.com</a>
     <!-- EDIT: Your social links (add real URLs in href="") -->
     <div class="socials reveal">
-        <a href="#" class="social">Instagram</a>
-        <a href="#" class="social">LinkedIn</a>
-        <a href="#" class="social">Behance</a>
+        <a href="https://www.instagram.com/alex.albita/" class="social" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@alexalbita310" class="social" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.linkedin.com/in/alex-albita-a68388254/" class="social" target="_blank" rel="noopener">LinkedIn</a>
     </div>
 </section>
 
 <!-- ── FOOTER ─────────────────────────────────────────────── -->
 <footer>
-    <!-- EDIT: Your name and year -->
-    <span class="footer-copy">© 2026 Your Name. All rights reserved.</span>
-    <span class="footer-name">Your <em>Name</em></span>
+    <div class="footer-top">
+        <span class="footer-copy">© 2026 Alex Albita. All rights reserved.</span>
+        <span class="footer-name">Alex <em>Albita</em></span>
+    </div>
+    <p class="footer-disclaimer">All photographs and visual content on this website are the exclusive property of Alex Albita and are protected by copyright law. Unauthorized downloading, reproduction, distribution, or use of any image without prior written permission is strictly prohibited.</p>
 </footer>
 
 <!-- ── ALBUM PAGE (slides up when a project is clicked) ───── -->
@@ -570,6 +605,73 @@
    ============================================================ */
 
 const projects = [
+    {
+        title: "Others",
+        category: "design",
+        location: "Bucharest",
+        client: "",
+        year: "2025",
+        description: "A collection of miscellaneous graphic design work — branding, print, and visual identity projects across various clients.",
+        cover: "images/aa-graphics/portofoliuAlexAlbita_page-0001.jpg",
+        photos: [
+            "images/aa-graphics/portofoliuAlexAlbita_page-0001.jpg",
+            "images/aa-graphics/portofoliuAlexAlbita_page-0002.jpg",
+            "images/aa-graphics/portofoliuAlexAlbita_page-0003.jpg",
+            "images/aa-graphics/Nufarul_CV1.png",
+            "images/aa-graphics/Nufarul_L2.png",
+            "images/aa-graphics/Nufarul_b1.png",
+        ]
+    },
+    {
+        title: "Break Tennis Club - Events",
+        category: "design",
+        location: "Bucharest",
+        client: "Break Tennis Club",
+        year: "2025",
+        description: "Event promotion graphics for Break Tennis Club — a series of visual materials for club events and social media campaigns.",
+        cover: "images/break-tennis-graphics/portofoliuAlexAlbita_page-0004.jpg",
+        photos: [
+            "images/break-tennis-graphics/portofoliuAlexAlbita_page-0004.jpg",
+            "images/break-tennis-graphics/portofoliuAlexAlbita_page-0005.jpg",
+            "images/break-tennis-graphics/portofoliuAlexAlbita_page-0006.jpg",
+            "images/break-tennis-graphics/portofoliuAlexAlbita_page-0007.jpg",
+        ]
+    },
+    {
+        title: "Hotel Lido - Events",
+        category: "design",
+        location: "Bucharest",
+        client: "Hotel Lido",
+        year: "2025",
+        description: "Event promotion graphics for Hotel Lido — poster designs for Valentine's Day and Dragobete celebrations.",
+        cover: "images/hotel-lido-graphics/Amouraporter.jpg",
+        photos: [
+            "images/hotel-lido-graphics/Amouraporter.jpg",
+            "images/hotel-lido-graphics/Dragdedragobete.jpg",
+        ]
+    },
+    {
+        title: "Black Coffee Amzei",
+        category: "design",
+        location: "Amzei Square, Bucharest",
+        client: "Black Coffee Amzei",
+        year: "2025",
+        description: "Brand and print design for Black Coffee Amzei — flyers, physical menus, combo menus, and a neighbourhood loyalty voucher. The visual identity balances a specialty-coffee aesthetic with the relaxed character of Amzei Square.",
+        cover: "images/black-coffee-graphics/FLYERBC1.jpg",
+        photos: [
+            "images/black-coffee-graphics/FLYERBC1.jpg",
+            "images/black-coffee-graphics/bcflyerv3.jpg",
+            "images/black-coffee-graphics/meniufizic-01-3_page-0001.jpg",
+            "images/black-coffee-graphics/meniufizic-01-3_page-0002.jpg",
+            "images/black-coffee-graphics/meniufizic-01-3_page-0003.jpg",
+            "images/black-coffee-graphics/meniuricombo.jpg",
+            "images/black-coffee-graphics/voucherdevecin.png",
+            "images/black-coffee-graphics/7546ab88-9d33-4d4e-808a-f7027c41bc76.jpeg",
+            "images/black-coffee-graphics/IMG_2026.jpeg",
+            "images/black-coffee-graphics/IMG_2027.jpeg",
+            "images/black-coffee-graphics/WhatsAppImage2025-06-30at18.35.00.jpeg",
+        ]
+    },
     {
         title: "Hotel Mercure Bucharest City Center",
         category: ["hospitality", "architecture"],
@@ -986,7 +1088,18 @@ const catLabels = {
 /* ── BUILD PORTFOLIO GRID ───────────────────────────────── */
 const grid = document.getElementById('portfolioGrid');
 
-projects.forEach((p, i) => {
+const catOrder = { architecture: 0, hospitality: 1, design: 2 };
+const sortedProjects = projects
+    .map((p, i) => ({ p, i }))
+    .sort((a, b) => {
+        const aCats = Array.isArray(a.p.category) ? a.p.category : [a.p.category];
+        const bCats = Array.isArray(b.p.category) ? b.p.category : [b.p.category];
+        const aMin = Math.min(...aCats.map(c => catOrder[c] ?? 99));
+        const bMin = Math.min(...bCats.map(c => catOrder[c] ?? 99));
+        return aMin - bMin;
+    });
+
+sortedProjects.forEach(({ p, i }) => {
     const cats = Array.isArray(p.category) ? p.category : [p.category];
     const el = document.createElement('div');
     el.className = 'p-item reveal';
@@ -1199,6 +1312,14 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── IMAGE PROTECTION ───────────────────────────────────── */
+document.addEventListener('contextmenu', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+});
 </script>
 
 </body>
